@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CLAUDE.md & Cursor Rules Generator — Free | AI Coder Scope</title>
+<meta name="description" content="Free generator for CLAUDE.md and .cursorrules config files. Pick your stack, get a production-ready config for Claude Code or Cursor in seconds." />
+<meta name="keywords" content="claude.md generator, cursorrules generator, claude code config, cursor rules, ai coding config" />
+<meta property="og:title" content="CLAUDE.md & Cursor Rules Generator — Free" />
+<meta property="og:description" content="Pick your stack, get a production-ready Claude Code / Cursor config in seconds." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230D1117'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%233FB950'>%3C%3E</text></svg>" />
+<style>
+  :root{
+    --bg:#0D1117; --panel:#161B22; --border:#222a35; --text:#E6EDF3; --muted:#8B949E;
+    --green:#3FB950; --blue:#58A6FF; --code:#0b0e14;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 20px 64px}
+  header{display:flex;align-items:center;gap:12px;padding:8px 0 4px}
+  .logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#0D1117,#1E2A44);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--green);font-family:monospace}
+  h1{font-size:30px;margin:18px 0 6px}
+  .sub{color:var(--muted);font-size:17px;margin:0 0 26px;max-width:680px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}
+  .label{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:1px solid var(--border);background:#0e131b;color:var(--text);border-radius:9px;padding:8px 12px;cursor:pointer;font-size:14px;transition:.12s}
+  .opt:hover{border-color:#3a4655}
+  .opt.active{border-color:var(--green);background:rgba(63,185,80,.12);color:#b7f7c2}
+  .checks{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+  .chk{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:14px}
+  .chk input{margin-top:3px;accent-color:var(--green);width:16px;height:16px}
+  .chk span small{color:var(--muted);display:block;font-size:12.5px}
+  .field{width:100%;background:#0e131b;border:1px solid var(--border);color:var(--text);border-radius:9px;padding:9px 11px;font-size:14px;margin-top:4px}
+  .out{position:relative}
+  pre{background:var(--code);border:1px solid var(--border);border-radius:14px;padding:16px;overflow:auto;max-height:560px;font-size:12.5px;white-space:pre-wrap;word-break:break-word;margin:0}
+  .bar{display:flex;gap:10px;margin:0 0 12px}
+  .btn{border:none;border-radius:9px;padding:10px 16px;font-size:14px;font-weight:600;cursor:pointer}
+  .btn.primary{background:var(--green);color:#06210d}
+  .btn.ghost{background:#0e131b;color:var(--text);border:1px solid var(--border)}
+  .btn:active{transform:translateY(1px)}
+  .cta{margin-top:30px;background:linear-gradient(135deg,#10131a,#1b2333);border:1px solid var(--border);border-radius:14px;padding:22px}
+  .cta h3{margin:0 0 8px}
+  .cta p{color:var(--muted);margin:0 0 14px}
+  .cta .row{display:flex;gap:12px;flex-wrap:wrap}
+  footer{color:var(--muted);font-size:13px;margin-top:34px;text-align:center}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green);color:#06210d;padding:10px 18px;border-radius:10px;font-weight:600;opacity:0;transition:.2s;pointer-events:none}
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">&lt;&gt;</div>
+    <strong>AI Coder Scope</strong>
+  </header>
+
+  <h1>CLAUDE.md &amp; Cursor Rules Generator</h1>
+  <p class="sub">Your AI coding agent ignores your conventions because it has no config. Pick your stack below and get a production-ready <code>CLAUDE.md</code> or <code>.cursorrules</code> in seconds — free.</p>
+
+  <div class="grid">
+    <!-- LEFT: controls -->
+    <div>
+      <div class="card">
+        <p class="label">1 · Target tool</p>
+        <div class="opts" id="tool"></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <p class="label">2 · Your stack</p>
+        <div class="opts" id="stack"></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <p class="label">3 · Project name (optional)</p>
+        <input class="field" id="proj" placeholder="e.g. Acme Dashboard" />
+        <p class="label" style="margin-top:16px">4 · Include</p>
+        <div class="checks" id="opts"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: output -->
+    <div>
+      <div class="bar">
+        <button class="btn primary" id="copy">Copy</button>
+        <button class="btn ghost" id="download">Download</button>
+      </div>
+      <div class="out"><pre id="preview"></pre></div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h3>Want the complete kit?</h3>
+    <p>This generates the basics. The full <strong>Agentic Coding Starter Kit</strong> adds 6 stacks, ready-made subagents (code-reviewer, test-writer, debugger), slash commands, hook recipes, and MCP setups.</p>
+    <div class="row">
+      <a class="btn primary" href="https://alphaletgo.gumroad.com/l/agentic-coding-kit" target="_blank" rel="noopener">Get the full kit →</a>
+      <a class="btn ghost" href="https://github.com/devloadout/awesome-claude-code-configs" target="_blank" rel="noopener">Free templates on GitHub ★</a>
+    </div>
+  </div>
+
+  <footer>Built by <a href="https://github.com/devloadout" target="_blank" rel="noopener">DevLoadout</a> · Free to use · Works with Claude Code &amp; Cursor</footer>
+</div>
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+const TOOLS = [
+  {id:"claude", label:"Claude Code (CLAUDE.md)"},
+  {id:"cursor", label:"Cursor (.cursorrules)"}
+];
+const STACKS = [
+  {id:"nextjs", label:"Next.js + TS"},
+  {id:"python", label:"Python / FastAPI"},
+  {id:"go", label:"Go"},
+  {id:"rust", label:"Rust"},
+  {id:"monorepo", label:"Monorepo"},
+  {id:"generic", label:"Generic"}
+];
+const OPTS = [
+  {id:"arch", label:"Architecture rules", desc:"Imperative rules the agent must follow", def:true},
+  {id:"cmds", label:"Commands + verify-before-done", desc:"Typecheck/lint/test, and run them before claiming done", def:true},
+  {id:"never", label:'"What NOT to do" section', desc:"Kills the most common annoying failures", def:true},
+  {id:"review", label:"Self-review step", desc:"Agent reviews its own diff as a skeptic", def:false}
+];
+
+const STACK_DATA = {
+  nextjs:{
+    name:"Next.js (App Router) + TypeScript",
+    desc:"Next.js (App Router), TypeScript, React Server Components, Tailwind CSS.",
+    arch:[
+      "Server Components by default. Add \"use client\" only for state, effects, or browser APIs — push the boundary as low as possible.",
+      "Fetch data in Server Components or Route Handlers, never in useEffect.",
+      "Mutations go through Server Actions, not ad-hoc API routes unless an external client needs them.",
+      "No business logic in components — extract to lib/. Use the @/* alias, never deep relative imports."
+    ],
+    cmds:[["Typecheck","pnpm tsc --noEmit"],["Lint","pnpm lint"],["Test","pnpm test"]],
+    never:[
+      "Don't create a pages/ directory — this is App Router only.",
+      "Don't use any or @ts-ignore to silence errors — fix the type.",
+      "Don't add dependencies without checking what already exists.",
+      "Don't reformat files you didn't change."
+    ]
+  },
+  python:{
+    name:"Python + FastAPI",
+    desc:"Python, FastAPI, Pydantic v2, SQLAlchemy 2.0 (async), Alembic.",
+    arch:[
+      "Layered: routers/ (HTTP only) → services/ (business logic) → repositories/ (DB). Routers must not touch the DB.",
+      "Pydantic models for all I/O. Never return ORM objects directly from an endpoint.",
+      "Async all the way down; never call blocking I/O in an async path — offload with run_in_threadpool.",
+      "Validate config with a Pydantic Settings class reading env — no bare os.getenv."
+    ],
+    cmds:[["Typecheck","mypy --strict ."],["Lint/format","ruff check . && ruff format ."],["Test","pytest -q"]],
+    never:[
+      "Don't use sync requests/time.sleep in async code — use httpx.AsyncClient/asyncio.sleep.",
+      "Don't catch bare except: — catch specific exceptions.",
+      "Don't commit secrets or .env.",
+      "Don't add a dependency before checking the stdlib or existing deps."
+    ]
+  },
+  go:{
+    name:"Go",
+    desc:"Go, standard library first.",
+    arch:[
+      "Standard library first; justify any third-party package before adding it.",
+      "Layout: cmd/<binary>/main.go for entrypoints, internal/ for private packages.",
+      "Errors are values — wrap with fmt.Errorf(\"doing X: %w\", err). Never discard with _ = without a comment.",
+      "Pass context.Context first to anything doing I/O; respect cancellation."
+    ],
+    cmds:[["Vet","go vet ./..."],["Test (race)","go test -race ./..."],["Format","gofmt -w ."]],
+    never:[
+      "Don't ignore returned errors.",
+      "Don't start goroutines you can't stop.",
+      "Don't add a dependency for something the stdlib already does."
+    ]
+  },
+  rust:{
+    name:"Rust",
+    desc:"Rust (stable, 2021 edition).",
+    arch:[
+      "Make illegal states unrepresentable — use enums and newtypes over bare primitives/booleans.",
+      "Return Result<T,E> for fallible ops; never unwrap on external input.",
+      "Structured errors: thiserror for libraries, anyhow for binaries. Add context with ? + .context().",
+      "Borrow by default; clone only when ownership is genuinely needed."
+    ],
+    cmds:[["Lint","cargo clippy --all-targets -- -D warnings"],["Format","cargo fmt"],["Test","cargo test"]],
+    never:[
+      "Don't .unwrap()/.expect() on I/O, parsing, or anything that can fail at runtime.",
+      "Don't silence clippy with #[allow(...)] to avoid fixing the issue.",
+      "Don't add a crate before checking the stdlib or an existing dependency."
+    ]
+  },
+  monorepo:{
+    name:"Monorepo",
+    desc:"Multi-package repo (apps/ + packages/), managed by a workspace tool (Turborepo/Nx/Cargo workspace).",
+    arch:[
+      "Respect package boundaries — a package may only import from packages it declares as dependencies.",
+      "Fix shared behavior in the shared package, not by patching each consumer.",
+      "Run tasks through the monorepo tool so caching/affected-detection works.",
+      "Keep changes scoped — don't touch unrelated packages in the same change."
+    ],
+    cmds:[["Build affected","pnpm turbo run build"],["Lint","pnpm turbo run lint"],["Test","pnpm turbo run test"]],
+    never:[
+      "Don't add a dependency to the root that belongs in a single package.",
+      "Don't duplicate code between packages — extract to a shared package.",
+      "Don't bypass the workspace tool with raw per-package commands when a task spans packages."
+    ]
+  },
+  generic:{
+    name:"this project",
+    desc:"",
+    arch:[
+      "Follow the conventions already present in the codebase — match the style of the files around your change.",
+      "Keep changes small and scoped to the task; don't refactor unrelated code.",
+      "Extract logic into well-named functions; avoid duplicating existing code.",
+      "Validate input at trust boundaries (HTTP, env, files, user)."
+    ],
+    cmds:[["Build","<<your build command>>"],["Lint","<<your lint command>>"],["Test","<<your test command>>"]],
+    never:[
+      "Don't add dependencies without checking what already exists.",
+      "Don't reformat files you didn't change.",
+      "Don't commit secrets or credentials.",
+      "Don't claim a task is done without running the checks above."
+    ]
+  }
+};
+
+const state = {tool:"claude", stack:"nextjs", opts:{}};
+OPTS.forEach(o=>state.opts[o.id]=o.def);
+
+function chip(container, items, key){
+  container.innerHTML="";
+  items.forEach(it=>{
+    const b=document.createElement("button");
+    b.className="opt"+(state[key]===it.id?" active":"");
+    b.textContent=it.label;
+    b.onclick=()=>{state[key]=it.id;chip(container,items,key);render();};
+    container.appendChild(b);
+  });
+}
+function renderChecks(){
+  const c=document.getElementById("opts");c.innerHTML="";
+  OPTS.forEach(o=>{
+    const l=document.createElement("label");l.className="chk";
+    l.innerHTML=`<input type="checkbox" ${state.opts[o.id]?"checked":""}/><span>${o.label}<small>${o.desc}</small></span>`;
+    l.querySelector("input").onchange=e=>{state.opts[o.id]=e.target.checked;render();};
+    c.appendChild(l);
+  });
+}
+
+function generate(){
+  const d=STACK_DATA[state.stack];
+  const proj=document.getElementById("proj").value.trim();
+  const isClaude=state.tool==="claude";
+  const L=[];
+  L.push(isClaude ? `# CLAUDE.md — ${d.name}` : `# ${d.name} — Cursor Rules`);
+  L.push("");
+  if(isClaude){
+    L.push("## Project");
+    L.push(proj ? `${proj}. ${d.desc}` : (d.desc || "<<one sentence on what this project does>>"));
+    L.push("");
+  } else {
+    L.push(`You are working in a ${d.name} codebase. ${proj?proj+". ":""}${d.desc}`);
+    L.push("");
+  }
+  if(state.opts.arch){
+    L.push(isClaude ? "## Architecture rules (follow exactly)" : "## Always");
+    d.arch.forEach(r=>L.push("- "+r));
+    L.push("");
+  }
+  if(state.opts.cmds){
+    L.push("## Commands");
+    d.cmds.forEach(([k,v])=>L.push(`- ${k}: \`${v}\``));
+    L.push("");
+    L.push("**Always run typecheck/lint/tests before reporting a task complete.**");
+    L.push("");
+  }
+  if(state.opts.never){
+    L.push(isClaude ? "## What NOT to do" : "## Never");
+    d.never.forEach(r=>L.push("- "+r));
+    L.push("");
+  }
+  if(state.opts.review){
+    L.push("## Before finishing — self review");
+    L.push("- Review your own diff as a skeptic. Classify issues 🔴 Bug / 🟡 Risk / 🔵 Cleanup, cite file:line, and fix the 🔴s.");
+    L.push("");
+  }
+  return L.join("\n").replace(/\n{3,}/g,"\n\n").trim()+"\n";
+}
+
+function render(){ document.getElementById("preview").textContent=generate(); }
+
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1400);}
+
+document.getElementById("copy").onclick=async()=>{
+  try{await navigator.clipboard.writeText(generate());toast("Copied!");}
+  catch{toast("Press Ctrl+C");}
+};
+document.getElementById("download").onclick=()=>{
+  const name=state.tool==="claude"?"CLAUDE.md":".cursorrules";
+  const blob=new Blob([generate()],{type:"text/markdown"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();
+  toast("Downloaded "+name);
+};
+
+chip(document.getElementById("tool"),TOOLS,"tool");
+chip(document.getElementById("stack"),STACKS,"stack");
+renderChecks();
+document.getElementById("proj").addEventListener("input",render);
+render();
+</script>
+</body>
+</html>
